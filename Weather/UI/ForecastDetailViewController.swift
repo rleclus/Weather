@@ -29,12 +29,6 @@ class ForecastDetailViewController: UIViewController {
     
     fileprivate var model: [IconModel] = []
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -61,28 +55,29 @@ class ForecastDetailViewController: UIViewController {
     private func buildModel() {
         
         if let currentForecast = forecast {
-            //temp high
-            if currentForecast.temperatureHigh != nil {
-                let temp = FormattingUtil.formatTemperature(temperature: currentForecast.temperatureHigh!)
-                model.append(IconModel(icon: "temperatureHigh", text: "High", value: "\(temp) °C"))
-            }
             //temp low
             if currentForecast.temperatureLow != nil {
                 let temp = FormattingUtil.formatTemperature(temperature: currentForecast.temperatureLow!)
-                model.append(IconModel(icon: "temperatureLow", text: "Low", value: "\(temp) °C"))
-            }
-            //windspeed
-            if currentForecast.windSpeed != nil {
-                model.append(IconModel(icon: "windspeed", text: "Wind Speed", value: "\(currentForecast.windSpeed!) m/s"))
+                model.append(IconModel(icon: "temperatureLow", text: "Low", value: "\(temp)"))
             }
             //sunrise
             if currentForecast.sunriseTime != nil {
                 model.append(IconModel(icon: "sunrise", text: "Sunrise", value: FormattingUtil.formatTime(date:currentForecast.sunriseTime!)))
             }
+            //windspeed
+            if currentForecast.windSpeed != nil {
+                model.append(IconModel(icon: "windspeed", text: "Wind Speed", value: "\(currentForecast.windSpeed!) m/s"))
+            }
+            //temp high
+            if currentForecast.temperatureHigh != nil {
+                let temp = FormattingUtil.formatTemperature(temperature: currentForecast.temperatureHigh!)
+                model.append(IconModel(icon: "temperatureHigh", text: "High", value: "\(temp)"))
+            }
             //sunset
             if currentForecast.sunsetTime != nil {
                 model.append(IconModel(icon: "sunset", text: "Sunset", value: FormattingUtil.formatTime(date:currentForecast.sunsetTime!)))
             }
+            //windbearing
             if currentForecast.windBearing != nil {
                 let direction = FormattingUtil.formatDirection(degree: currentForecast.windBearing!)
                 model.append(IconModel(icon: "winddirection", text: "Wind Direction", value: direction))
@@ -96,7 +91,7 @@ class ForecastDetailViewController: UIViewController {
     }
 }
 
-extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -111,6 +106,13 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
         cell.textLabel.text = item.text
         cell.valueLabel.text = item.value
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        let width = (self.view.frame.size.width) / 2 //some width
+        let height = (collectionView.frame.height) / 3 //ratio
+        return CGSize(width: width, height: height)
+        
     }
 
 }

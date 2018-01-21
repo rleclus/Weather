@@ -14,7 +14,8 @@ class FormattingUtil {
         
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumSignificantDigits = 2
-        return numberFormatter.string(from: NSNumber(value: temperature))!
+        let stringTemp = numberFormatter.string(from: NSNumber(value: temperature))!
+        return "\(stringTemp) °C"
     }
     
     static func formatDate(date: NSDate) -> String {

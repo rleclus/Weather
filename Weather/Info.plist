@@ -43,6 +43,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Geotify requires access to your phone’s location to notify you when you enter or leave a geofence.</string>
+	<string>Weather needs to know where you are (your location) to give the best weather forecast available</string>
 </dict>
 </plist>

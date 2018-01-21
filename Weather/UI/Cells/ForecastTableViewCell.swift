@@ -19,7 +19,7 @@ class ForecastTableViewCell: UITableViewCell, ForecastCellProtocol {
 
         textLabel?.numberOfLines = 0
         let high = FormattingUtil.formatTemperature(temperature: details.temperatureHigh!)
-        textLabel?.text = "\(high) °C - \(details.summary!)"
+        textLabel?.text = "\(high) - \(details.summary!)"
         imageView?.image = UIImage(named: details.icon!)
         detailTextLabel?.text = FormattingUtil.formatDate(date: details.time!)
 

@@ -27,7 +27,7 @@ class TodayForecastTableViewCell: UITableViewCell, ForecastCellProtocol {
         weatherDetails.attributedText = text
         if currentTemperature != nil {
             let temperature = FormattingUtil.formatTemperature(temperature: currentTemperature!)
-            weatherTemperature.text = "\(temperature) °C"
+            weatherTemperature.text = temperature
         } else {
             weatherTemperature.text = ""
         }
@@ -48,7 +48,7 @@ class TodayForecastTableViewCell: UITableViewCell, ForecastCellProtocol {
         }
         let high = FormattingUtil.formatTemperature(temperature: details.temperatureHigh!)
         let low = FormattingUtil.formatTemperature(temperature: details.temperatureLow!)
-        let tempMessage = "\nThe low for today is \(low) °C and the high is \(high) °C"
+        let tempMessage = "\nThe low for today is \(low) and the high is \(high)"
         text.append(NSAttributedString(string: tempMessage, attributes: [NSAttributedStringKey.font : mainFont]))
     }
     
