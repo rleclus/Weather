@@ -29,6 +29,14 @@ class ForecastDetailViewController: UIViewController {
     
     fileprivate var model: [IconModel] = []
     
+    var cellSize: CGSize? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let width = (self.view.frame.size.width) / 2 //some width
+        let height = (collectionView.frame.height) / 3 //ratio
+        cellSize = CGSize(width: width, height: height)
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -109,10 +117,7 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let width = (self.view.frame.size.width) / 2 //some width
-        let height = (collectionView.frame.height) / 3 //ratio
-        return CGSize(width: width, height: height)
-        
+        return cellSize!
     }
 
 }

@@ -84,7 +84,9 @@ class DailyForecastViewController: UIViewController {
         NetworkService.shared.getForecast(location: coordinates!) { [weak self] (forecast, error) in
             
             if forecast == nil {
-                self?.showError(message: error?.localizedDescription ?? "")
+                DispatchQueue.main.async(execute: {
+                    self?.showError(message: error?.localizedDescription ?? "")
+                })
             } else {
                 self?.forecast = forecast
                 self?.dailyForecasts = forecast?.dailyForecast?.data
@@ -121,10 +123,10 @@ class DailyForecastViewController: UIViewController {
 
     @IBAction func infoButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "About", message: "Created by Robert le Clus ©2018\n\n Powered by Dark Sky", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "DarkSky.net", style: .default, handler: { (action) in
             UIApplication.shared.open(URL(string:"https://darksky.net/poweredby/")!, options: [:], completionHandler: nil)
         }))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
